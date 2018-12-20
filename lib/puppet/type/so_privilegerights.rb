@@ -32,7 +32,7 @@ Puppet::Type.newtype(:so_privilegerights) do
             @fragments ||= resource.catalog.resources.map { |res|
                 next unless res.is_a?(Puppet::Type.type(:user_rights_assignment))
 
-                if res[:right] == @resource[:name] || res[:right] == @resource[:title]
+                if res[:right] == resource.name || res[:right] == resource.title
                     res
                 end
             }.compact
@@ -45,7 +45,7 @@ Puppet::Type.newtype(:so_privilegerights) do
                 values << f[:sid]
             end
 
-            values.compact
+            values.flatten.compact
         end
 
         def insync?(current)
