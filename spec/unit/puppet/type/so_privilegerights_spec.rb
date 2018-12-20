@@ -65,12 +65,12 @@ describe Puppet::Type.type(:so_privilegerights) do
             res = described_class.new(
                 :title  => valid_name,
                 :ensure => :present,
-                :sid    => [],
+                :sid    => ['some_sid'],
             )
 
             res.catalog = catalog
 
-            expect(res.property(:sid).should).to eq (['CORP\admin', '*S-1-5-11', '*S-1-5-32-544'])
+            expect(res.property(:sid).should).to eq (['some_sid', 'CORP\admin', '*S-1-5-11', '*S-1-5-32-544'])
         end
     end
 end
